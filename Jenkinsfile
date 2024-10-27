@@ -70,6 +70,7 @@ pipeline {
                     
                     sh '''
                     git clone https://github.com/kkhoi/Multi-Tier-BankApp-CD.git
+                    cd Multi-Tier-BankApp-CD
                     bankapp_cd=$(pwd)
                     sed -i 's|image: khoi2010/bankapp:.*|image: khoi2010/bankapp:${BUILD_NUMBER}|'$bankapp_cd/bankapp/bankapp-ds.yml
                     git add bankapp/bankapp-ds.yml
