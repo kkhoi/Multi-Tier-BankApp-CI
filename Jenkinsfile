@@ -69,6 +69,7 @@ pipeline {
                 script {
                     
                     sh '''
+                    rm -rf Multi-Tier-BankApp-CD
                     git clone https://github.com/kkhoi/Multi-Tier-BankApp-CD.git
                     cd Multi-Tier-BankApp-CD
                     bankapp_cd=$(pwd)
