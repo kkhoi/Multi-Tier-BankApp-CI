@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/kkhoi/FullStack-Blogging-App.git'
+                git branch: 'main', url: 'https://github.com/kkhoi/Multi-Tier-BankApp-CI.git'
             }
         }
         stage('Compile') {
@@ -59,6 +59,19 @@ pipeline {
             }
             
         }
+        stage('Git Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/kkhoi/Multi-Tier-BankApp-CD.git'
+                bankapp_cd=$(pwd)
+                sed -i 's|image: khoi2010/bankapp:.*|image: khoi2010/bankapp:${BUILD_NUMBER}'$bankapp_cd/bankapp/bankapp-ds.yml
+                sh '''
+                    git add Multi-Tier-BankApp-CD/bankapp/bankapp-ds.yml
+                    git commit -m "Update docker image tag to ${BUILD_NUMBER}"
+                    git push origin main
+                '''
+            }
+        }
+        
         // stage('Deploy To Kubernetes') {
         //     steps {
         //         withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'bloggingapp', contextName: '', credentialsId: 'kube-cred', namespace: 'webapps', serverUrl: 'https://72AC27E8BFC7AC351AAFE1B1B4AB7C8A.yl4.ap-southeast-1.eks.amazonaws.com']]) {
