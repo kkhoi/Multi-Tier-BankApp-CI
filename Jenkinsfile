@@ -62,10 +62,11 @@ pipeline {
         stage('Git Clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/kkhoi/Multi-Tier-BankApp-CD.git'
-                bankapp_cd=$(pwd)
-                sed -i 's|image: khoi2010/bankapp:.*|image: khoi2010/bankapp:${BUILD_NUMBER}'$bankapp_cd/bankapp/bankapp-ds.yml
                 sh '''
-                    git add Multi-Tier-BankApp-CD/bankapp/bankapp-ds.yml
+                    cd Multi-Tier-BankApp-CD
+                    bankapp_cd=$(pwd)
+                    sed -i 's|image: khoi2010/bankapp:.*|image: khoi2010/bankapp:${BUILD_NUMBER}'$bankapp_cd/bankapp/bankapp-ds.yml
+                    git add bankapp/bankapp-ds.yml
                     git commit -m "Update docker image tag to ${BUILD_NUMBER}"
                     git push origin main
                 '''
