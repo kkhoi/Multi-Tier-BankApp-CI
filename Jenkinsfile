@@ -67,8 +67,9 @@ pipeline {
         stage('Git Clone') {
             steps {
                 script {
-                    git branch: 'main', url: 'https://github.com/kkhoi/Multi-Tier-BankApp-CD.git'
-                    sh '''                    
+                    
+                    sh '''
+                    git clone https://github.com/kkhoi/Multi-Tier-BankApp-CD.git
                     bankapp_cd=$(pwd)
                     sed -i 's|image: khoi2010/bankapp:.*|image: khoi2010/bankapp:${BUILD_NUMBER}|'$bankapp_cd/bankapp/bankapp-ds.yml
                     git add bankapp/bankapp-ds.yml
@@ -76,7 +77,7 @@ pipeline {
                     git push origin main
                     '''
                 }
-               
+            cleanWs()   
             }
         }
         
