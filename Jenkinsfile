@@ -67,8 +67,8 @@ pipeline {
         stage('Git Clone') {
             steps {
                 script {
-                    
-                    sh '''
+                    withCredentials([gitUsernamePassword(credentialsId: 'git-cred', gitToolName: 'Default')]) {
+                        sh '''
                     rm -rf Multi-Tier-BankApp-CD
                     git clone https://github.com/kkhoi/Multi-Tier-BankApp-CD.git
                     cd Multi-Tier-BankApp-CD
@@ -81,10 +81,12 @@ pipeline {
                     git commit -m "Update docker image tag to ${BUILD_NUMBER}"
                     git push origin main
                     '''
+                    }            
+                    
                 }   
             }
         }
-        
+        cleanWs()
         // stage('Deploy To Kubernetes') {
         //     steps {
         //         withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'bloggingapp', contextName: '', credentialsId: 'kube-cred', namespace: 'webapps', serverUrl: 'https://72AC27E8BFC7AC351AAFE1B1B4AB7C8A.yl4.ap-southeast-1.eks.amazonaws.com']]) {
