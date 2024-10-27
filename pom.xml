@@ -80,7 +80,7 @@
 	
 	</build>
 
-		<distributionManagement>
+<!-- 		<distributionManagement>
         <repository>
             <id>maven-releases</id>
             <url>http://3.110.159.98:8081/repository/maven-releases/</url>
@@ -89,6 +89,6 @@
             <id>maven-snapshots</id>
             <url>http://3.110.159.98:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
-    </distributionManagement>
+    </distributionManagement> -->
 
 </project>
