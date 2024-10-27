@@ -19,6 +19,11 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        stage('Test') {
+            steps {
+                sh 'mvn test -DskipTests=true'
+            }
+        }
         // stage('Sonar Ana') {
         //     steps {
         //         withSonarQubeEnv('sonarserver') {
@@ -27,11 +32,11 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Build') {
-            steps {
-                sh 'mvn package'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh 'mvn package'
+        //     }
+        // }
         // stage('Publish Artifact') {
         //     steps {
         //         withMaven(globalMavenSettingsConfig: 'maven-setting', jdk: 'jdk17', maven: 'maven3', mavenSettingsConfig: '', traceability: true) {
