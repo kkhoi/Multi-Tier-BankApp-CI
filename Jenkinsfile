@@ -86,7 +86,7 @@ pipeline {
                 }   
             }
         }
-        cleanWs()
+        //cleanWs()
         // stage('Deploy To Kubernetes') {
         //     steps {
         //         withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'bloggingapp', contextName: '', credentialsId: 'kube-cred', namespace: 'webapps', serverUrl: 'https://72AC27E8BFC7AC351AAFE1B1B4AB7C8A.yl4.ap-southeast-1.eks.amazonaws.com']]) {
