@@ -74,12 +74,14 @@ pipeline {
                     cd Multi-Tier-BankApp-CD
                     bankapp_cd=$(pwd)
                     sed -i 's|image: khoi2010/bankapp:.*|image: khoi2010/bankapp:'"${BUILD_NUMBER}"'|' ${bankapp_cd}/bankapp/bankapp-ds.yml
+
+                    git config user.email "test@example.com"
+                    git config user.name "test"
                     git add bankapp/bankapp-ds.yml
                     git commit -m "Update docker image tag to ${BUILD_NUMBER}"
                     git push origin main
                     '''
-                }
-            cleanWs()   
+                }   
             }
         }
         
